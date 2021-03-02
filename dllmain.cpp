@@ -96,6 +96,24 @@ void hook(__int64 addr, __int64 func, __int64* orig)
     hook((__int64)addr, (__int64)func, orig, (__int64)1);
 }
 
+short GetAsyncKeyState(const int vKey)
+    {
+        static uintptr_t addrGetAsyncKeyState = NULL;
+
+        if (!addrGetAsyncKeyState)
+        {
+        addrGetAsyncKeyState = sigscan("GameOverlayRenderer64.dll", "40 53 48 83 EC 20 80 3D ? ? ? ? ? 8B D9");
+        }
+
+        if (!addrGetAsyncKeyState)
+            return false;
+
+        using GetAsyncKeyState_t = short(__fastcall*)(int);
+        auto fnGetAyncKeyState = (GetAsyncKeyState_t)addrGetAsyncKeyState;
+
+        return fnGetAyncKeyState(vKey);
+    }
+
 void init()
 {
     if (!GetModuleHandleA("GameOverlayRenderer64.dll"))
