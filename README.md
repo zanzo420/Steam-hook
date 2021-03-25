@@ -1,5 +1,5 @@
 # Steam-hook
 
-all the credits to Bastian Suter#0687
+all the credits to @DXGI on uc
 
 https://github.com/furiosdestruct/Steam-Hook-Render-PoC
